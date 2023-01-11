@@ -22,30 +22,11 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "ttodArray",
-				"outputs": [
-					{
-						"internalType": "contract Accounts",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "_ttodindex",
 						"type": "uint256"
 					}
 				],
-				"name": "ttodClaim",
+				"name": "factoryclaim",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -58,7 +39,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodInitiateClaim",
+				"name": "factoryinitiateClaim",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -71,7 +52,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodReturnDeployer",
+				"name": "factoryreturnDeployer",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -90,7 +71,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodReturnHeir",
+				"name": "factoryreturnHeir",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -109,7 +90,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodReturnOwner",
+				"name": "factoryreturnOwner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -138,7 +119,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodSetHeir",
+				"name": "factorysetHeir",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -151,7 +132,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodStopClaim",
+				"name": "factorystopClaim",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -164,9 +145,28 @@
 						"type": "uint256"
 					}
 				],
-				"name": "ttodWithdraw",
+				"name": "factorywithdraw",
 				"outputs": [],
 				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodArray",
+				"outputs": [
+					{
+						"internalType": "contract TTOD",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -183,7 +183,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contract/ttod.sol": "TTODFactory"
+			"contract/TTODFactory.sol": "TTODFactory"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -197,20 +197,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contract/accounts.sol": {
-			"keccak256": "0xca3b153ea4331fa833a8971e1487322c0f67dffdff7aca7df08f108a8e284173",
+		"contract/TTOD.sol": {
+			"keccak256": "0xbe48b6984ab18e8688d8c1a678d2048ccb6067b6851e94b491df10af5e58f736",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fd6f9905bea86bb2a73ff5b95be9fb62d5b664d721e65396c7f256f2144353be",
-				"dweb:/ipfs/QmaBWii99udPXbykLGbAFn24t4eQ4P6ueq8uMGrjayqnit"
+				"bzz-raw://185e7dc6e74c909338a95ab8cba5c2e05829c56b8e2d063534ae9a079034edd5",
+				"dweb:/ipfs/QmW5wF6AX1WdLtzq2gUJF79oRo7pPc9oR1FD2Qhwcz6prF"
 			]
 		},
-		"contract/ttod.sol": {
-			"keccak256": "0xc9473b28a872c5334e29c10249603a49d0ec06e4789efb153b9bd883c7a02880",
+		"contract/TTODFactory.sol": {
+			"keccak256": "0x386ef5c329971fbec573ba264d47559f0530e26b3e95b6973d335114d8fff150",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3891d36bcbc03ad1778578469e9c0905c5726cf7769563f40b0729f211011e52",
-				"dweb:/ipfs/QmYLjciH7cGbSA17KsgCVaST48XsfZD5KmcRFDqnVPT8Re"
+				"bzz-raw://a273b381d4f85bce9f7f3be67845e0b4aa2ef4ba0a1c42fab3f7a1c18ca745b9",
+				"dweb:/ipfs/QmNjqhfsufBnE8KP6zLdEaE9dLwbJWJ6f5eihZ9BApQrT2"
 			]
 		}
 	},
