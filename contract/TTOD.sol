@@ -1,72 +1,67 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 
-contract TTOD {
-    // The address of the owner of the contract
-    address public owner;
-    // The address of the heir
-    address public heir;
-    // Flag to track if the claim process has started
-    bool public claimInProgress;
-    // Timestamp of when the claim process was initiated
-    uint public claimInitiatedAt;
-    // The number of days the heir needs to wait before being able to claim the account
-    uint public claimDelay;
+import "./accounts.sol";
 
-      constructor(address _owner) public {
-           owner = _owner;
+// Factory contract for creating TTOD contracts
+contract TTODFactory {
+
+    // Accounts array
+    Accounts[] public ttodArray;
+ 
+    function createTTOD() public returns(address) {
+       Accounts ttod = new Accounts(payable(msg.sender));    
+       ttodArray.push(ttod);
+       return address(ttod);
     }
 
     // Function to set the heir and claimDelay
-    function setHeir(address _heir, uint _claimDelay, address _sender) public {
-        require(owner == _sender, "Only the owner can set the heir.");
-        heir = _heir;
-        claimDelay = _claimDelay;
-    }
+    function ttodSetHeir(uint256 _ttodindex, address payable _heir, uint _claimDelay) public {
 
-    // Function for the heir to start the claim process
-    function initiateClaim(address _sender) public {
-        require(heir == _sender, "Only the heir can initiate the claim process.");
-        require(!claimInProgress, "Claim process is already in progress.");
-        claimInProgress = true;
-        claimInitiatedAt = block.timestamp;
+        ttodArray[_ttodindex].setHeir(_heir, _claimDelay, msg.sender);
+        }
+// Function for the heir to start the claim process
+    function ttodInitiateClaim(uint256 _ttodindex) public {
+        ttodArray[_ttodindex].initiateClaim(msg.sender);
     }
 
     // Function for the heir to claim the account
-    function claim(address _sender) public  {
-        require(heir == _sender, "Only the heir can claim the account.");
-        require(claimInProgress, "Claim process has not been initiated.");
-        require(block.timestamp >= claimInitiatedAt + claimDelay * 1 days, "Claim delay has not expired.");
-        owner = heir;
+    function ttodClaim(uint256 _ttodindex) public  {
+        ttodArray[_ttodindex].claim(msg.sender);
         }
 
-    function withdraw(address _sender) public payable {
-        require(_sender == owner, "Only the owner can withdraw funds.");
-        require(address(this).balance > 0, "There are no funds to withdraw.");
-        msg.sender.transfer(address(this).balance);
+    function ttodWithdraw(uint256 _ttodindex, uint _amount, address payable _feeAddress, uint _transferFee) public payable {
+        ttodArray[_ttodindex].withdraw(_amount, msg.sender, _feeAddress, _transferFee);
     }
 
-    function stopClaim(address _sender) public {
-        require(_sender == owner, "Only the owner can stop a claim.");
-        require(claimInProgress, "There is no active claim to stop.");
-        claimInProgress = false;
+    function ttodWithdrawERC20(uint256 _ttodindex, uint _amount, address _ERC20Address, address payable _feeAddress, uint _transferFee) public payable {
+        ttodArray[_ttodindex].withdrawERC20(_amount, _ERC20Address, msg.sender, _feeAddress, _transferFee);
     }
 
-    function returnOwner() public view returns(address){
-        return owner;
+    function ttodTransferFunds(uint256 _ttodindex, address payable _recipient, uint _amount, address payable _feeAddress, uint _transferFee) public payable {
+        ttodArray[_ttodindex].transferFunds(_recipient, _amount, msg.sender, _feeAddress, _transferFee);
+}
+
+    function ttodTransferERC20Funds(uint256 _ttodindex, address payable _recipient, uint _amount, address _ERC20Address, address payable _feeAddress, uint _transferFee) public payable {
+        ttodArray[_ttodindex].transferERC20Funds(_recipient, _amount, _ERC20Address, msg.sender, _feeAddress, _transferFee);
+    }
+
+    function ttodStopClaim(uint256 _ttodindex) public {
+        ttodArray[_ttodindex].stopClaim(msg.sender);
+    }
+
+    function ttodReturnOwner(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnOwner();
+    }
+    
+     function ttodReturnHeir(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnHeir();
+    }
+    
+    function ttodReturnDeployer(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnDeployer();
     }
 
 }
 
-
-
-//  amount and token to withdraw
-// cEUR, cReal and cUSD
-// verify no funds because there are more than one token
-// fallback
-// fee
-//map
-//return owner and heir
-// search contract by owner or heir 
-//hook
