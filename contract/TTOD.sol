@@ -1,75 +1,55 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.10;
+pragma solidity ^0.8.0;
 
-contract TTOD {
-    // The address of the deployer of the contract
-    address public deployer;
-    // The address of the owner of the contract
-    address payable public owner;
-    // The address of the heir
-    address payable public heir;
-    // Flag to track if the claim process has started
-    bool public claimInProgress;
-    // Timestamp of when the claim process was initiated
-    uint public claimInitiatedAt;
-    // The number of days the heir needs to wait before being able to claim the account
-    uint public claimDelay;
+import "./accounts.sol";
 
-      constructor(address payable _owner) public {
-           owner = _owner;
-           deployer = msg.sender;
+// Factory contract for creating TTOD contracts
+contract TTODFactory {
+
+    // Accounts array
+    Accounts[] public ttodArray;
+ 
+    function createTTOD() public returns(address) {
+       Accounts ttod = new Accounts(payable(msg.sender));    
+       ttodArray.push(ttod);
+       return address(ttod);
     }
 
     // Function to set the heir and claimDelay
-    function setHeir(address payable _heir, uint _claimDelay, address _sender) public {
-        require(owner == _sender, "Only the owner can set the heir.");
-        heir = _heir;
-        claimDelay = _claimDelay;
-    }
+    function ttodSetHeir(uint256 _ttodindex, address payable _heir, uint _claimDelay) public {
 
-    // Function for the heir to start the claim process
-    function initiateClaim(address _sender) public {
-        require(heir == _sender, "Only the heir can initiate the claim process.");
-        require(!claimInProgress, "Claim process is already in progress.");
-        claimInProgress = true;
-        claimInitiatedAt = block.timestamp;
+        ttodArray[_ttodindex].setHeir(_heir, _claimDelay, msg.sender);
+        }
+// Function for the heir to start the claim process
+    function ttodInitiateClaim(uint256 _ttodindex) public {
+        ttodArray[_ttodindex].initiateClaim(msg.sender);
     }
 
     // Function for the heir to claim the account
-    function claim(address _sender) public  {
-        require(heir == _sender, "Only the heir can claim the account.");
-        require(claimInProgress, "Claim process has not been initiated.");
-        require(block.timestamp >= claimInitiatedAt + claimDelay * 1 days, "Claim delay has not expired.");
-        owner = heir;
+    function ttodClaim(uint256 _ttodindex) public  {
+        ttodArray[_ttodindex].claim(msg.sender);
         }
 
-    function withdraw(address _sender) public payable {
-        require(_sender == owner, "Only the owner can withdraw funds.");
-        require(address(this).balance > 0, "There are no funds to withdraw.");
-        owner.transfer(address(this).balance);
+    function ttodWithdraw(uint256 _ttodindex, uint _amount) public payable {
+        ttodArray[_ttodindex].withdraw(_amount, msg.sender);
     }
 
-    function stopClaim(address _sender) public {
-        require(_sender == owner, "Only the owner can stop a claim.");
-        require(claimInProgress, "There is no active claim to stop.");
-        claimInProgress = false;
+    function ttodStopClaim(uint256 _ttodindex) public {
+        ttodArray[_ttodindex].stopClaim(msg.sender);
     }
 
-    function returnOwner() public view returns(address){
-        return owner;
+    function ttodReturnOwner(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnOwner();
     }
-
     
-    function returnHeir() public view returns(address){
-        return heir;
+     function ttodReturnHeir(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnHeir();
     }
-
     
-    function returnDeployer() public view returns(address){
-        return deployer;
+    function ttodReturnDeployer(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnDeployer();
     }
 
 }
-
 
