@@ -3,10 +3,12 @@
 pragma solidity ^0.6.10;
 
 contract TTOD {
+    // The address of the deployer of the contract
+    address public deployer;
     // The address of the owner of the contract
-    address public owner;
+    address payable public owner;
     // The address of the heir
-    address public heir;
+    address payable public heir;
     // Flag to track if the claim process has started
     bool public claimInProgress;
     // Timestamp of when the claim process was initiated
@@ -14,12 +16,13 @@ contract TTOD {
     // The number of days the heir needs to wait before being able to claim the account
     uint public claimDelay;
 
-      constructor(address _owner) public {
+      constructor(address payable _owner) public {
            owner = _owner;
+           deployer = msg.sender;
     }
 
     // Function to set the heir and claimDelay
-    function setHeir(address _heir, uint _claimDelay, address _sender) public {
+    function setHeir(address payable _heir, uint _claimDelay, address _sender) public {
         require(owner == _sender, "Only the owner can set the heir.");
         heir = _heir;
         claimDelay = _claimDelay;
@@ -44,7 +47,7 @@ contract TTOD {
     function withdraw(address _sender) public payable {
         require(_sender == owner, "Only the owner can withdraw funds.");
         require(address(this).balance > 0, "There are no funds to withdraw.");
-        msg.sender.transfer(address(this).balance);
+        owner.transfer(address(this).balance);
     }
 
     function stopClaim(address _sender) public {
@@ -57,16 +60,16 @@ contract TTOD {
         return owner;
     }
 
+    
+    function returnHeir() public view returns(address){
+        return heir;
+    }
+
+    
+    function returnDeployer() public view returns(address){
+        return deployer;
+    }
+
 }
 
 
-
-//  amount and token to withdraw
-// cEUR, cReal and cUSD
-// verify no funds because there are more than one token
-// fallback
-// fee
-//map
-//return owner and heir
-// search contract by owner or heir 
-//hook

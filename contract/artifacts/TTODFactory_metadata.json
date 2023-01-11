@@ -1,0 +1,218 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "createTTOD",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factoryclaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factoryinitiateClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factoryreturnDeployer",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factoryreturnHeir",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factoryreturnOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_heir",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_claimDelay",
+						"type": "uint256"
+					}
+				],
+				"name": "factorysetHeir",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factorystopClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "factorywithdraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodArray",
+				"outputs": [
+					{
+						"internalType": "contract TTOD",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contract/TTODFactory.sol": "TTODFactory"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contract/TTOD.sol": {
+			"keccak256": "0xbe48b6984ab18e8688d8c1a678d2048ccb6067b6851e94b491df10af5e58f736",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://185e7dc6e74c909338a95ab8cba5c2e05829c56b8e2d063534ae9a079034edd5",
+				"dweb:/ipfs/QmW5wF6AX1WdLtzq2gUJF79oRo7pPc9oR1FD2Qhwcz6prF"
+			]
+		},
+		"contract/TTODFactory.sol": {
+			"keccak256": "0x386ef5c329971fbec573ba264d47559f0530e26b3e95b6973d335114d8fff150",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a273b381d4f85bce9f7f3be67845e0b4aa2ef4ba0a1c42fab3f7a1c18ca745b9",
+				"dweb:/ipfs/QmNjqhfsufBnE8KP6zLdEaE9dLwbJWJ6f5eihZ9BApQrT2"
+			]
+		}
+	},
+	"version": 1
+}

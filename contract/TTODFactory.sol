@@ -15,7 +15,7 @@ contract TTODFactory {
     }
 
     // Function to set the heir and claimDelay
-    function factorysetHeir(uint256 _ttodindex, address _heir, uint _claimDelay) public {
+    function factorysetHeir(uint256 _ttodindex, address payable _heir, uint _claimDelay) public {
 
         ttodArray[_ttodindex].setHeir(_heir, _claimDelay, msg.sender);
         }
@@ -39,6 +39,14 @@ contract TTODFactory {
 
     function factoryreturnOwner(uint256 _ttodindex) public view returns(address){
         return ttodArray[_ttodindex].returnOwner();
+    }
+    
+     function factoryreturnHeir(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnHeir();
+    }
+    
+    function factoryreturnDeployer(uint256 _ttodindex) public view returns(address){
+        return ttodArray[_ttodindex].returnDeployer();
     }
 
 }
