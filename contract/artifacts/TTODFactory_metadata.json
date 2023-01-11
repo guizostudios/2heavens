@@ -1,0 +1,218 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "createTTOD",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodArray",
+				"outputs": [
+					{
+						"internalType": "contract Accounts",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodInitiateClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodReturnDeployer",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodReturnHeir",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodReturnOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_heir",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_claimDelay",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodSetHeir",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodStopClaim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "ttodWithdraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contract/ttod.sol": "TTODFactory"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contract/accounts.sol": {
+			"keccak256": "0xca3b153ea4331fa833a8971e1487322c0f67dffdff7aca7df08f108a8e284173",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fd6f9905bea86bb2a73ff5b95be9fb62d5b664d721e65396c7f256f2144353be",
+				"dweb:/ipfs/QmaBWii99udPXbykLGbAFn24t4eQ4P6ueq8uMGrjayqnit"
+			]
+		},
+		"contract/ttod.sol": {
+			"keccak256": "0xc9473b28a872c5334e29c10249603a49d0ec06e4789efb153b9bd883c7a02880",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3891d36bcbc03ad1778578469e9c0905c5726cf7769563f40b0729f211011e52",
+				"dweb:/ipfs/QmYLjciH7cGbSA17KsgCVaST48XsfZD5KmcRFDqnVPT8Re"
+			]
+		}
+	},
+	"version": 1
+}
