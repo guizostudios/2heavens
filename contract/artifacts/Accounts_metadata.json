@@ -17,32 +17,6 @@
 				"type": "constructor"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "freezeBy",
-						"type": "address"
-					}
-				],
-				"name": "Freeze",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "unfreezeBy",
-						"type": "address"
-					}
-				],
-				"name": "Unfreeze",
-				"type": "event"
-			},
-			{
 				"inputs": [],
 				"name": "ERC20",
 				"outputs": [
@@ -66,30 +40,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "_isCelo",
-						"type": "bool"
-					},
-					{
-						"internalType": "address",
-						"name": "_ERC20Address",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -152,50 +102,6 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "_isCelo",
-						"type": "bool"
-					},
-					{
-						"internalType": "address",
-						"name": "_ERC20Address",
-						"type": "address"
-					}
-				],
-				"name": "deposit",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_sender",
-						"type": "address"
-					}
-				],
-				"name": "freeze",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "frozen",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -329,25 +235,7 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "tokenBalance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "_isCelo",
-						"type": "bool"
-					},
 					{
 						"internalType": "address payable",
 						"name": "_recipient",
@@ -379,6 +267,39 @@
 						"type": "uint256"
 					}
 				],
+				"name": "transferERC20Funds",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "_recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_sender",
+						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_feeAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_transferFee",
+						"type": "uint256"
+					}
+				],
 				"name": "transferFunds",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -387,23 +308,33 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
 						"internalType": "address",
 						"name": "_sender",
 						"type": "address"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_feeAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_transferFee",
+						"type": "uint256"
 					}
 				],
-				"name": "unfreeze",
+				"name": "withdraw",
 				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
 				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "_isCelo",
-						"type": "bool"
-					},
 					{
 						"internalType": "uint256",
 						"name": "_amount",
@@ -430,7 +361,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "withdraw",
+				"name": "withdrawERC20",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -449,7 +380,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contract/HeirAccount.sol": "Accounts"
+			"contract/accounts.sol": "Accounts"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -463,12 +394,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contract/HeirAccount.sol": {
-			"keccak256": "0x8def3db32c8cc13691205db32d04276d942db27c4686b16744e232fccbbea16e",
+		"contract/accounts.sol": {
+			"keccak256": "0xef885e122b099c72e7be43f10cd1fed7cbb50e58cd49c5fc2505799b75060677",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a74c1e0814a41a3e8cfba2f04a8fee4b00a8353d62c2c21c241747fb3860320b",
-				"dweb:/ipfs/QmVTTSTuLDXasLdYKdz4RRr5tLmVHnQkqf3PZ7F3xAGV8u"
+				"bzz-raw://4c9b230c46bd188dcbe729eb7e316d31ac3d0e0c18a2b5ec2784ed05daedd22a",
+				"dweb:/ipfs/QmRSe2TY5qFbsKD3FzGANNkuKNsnJKGhfuQMcF83YNs9sm"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/49c0e4370d0cc50ea6090709e3835a3091e33ee2/contracts/token/ERC20/IERC20.sol": {
