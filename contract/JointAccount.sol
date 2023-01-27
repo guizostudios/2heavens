@@ -161,7 +161,7 @@ contract Accounts {
 
     // Function to return the withdraw limit for each token
     function getWithdrawLimit(address _ERC20Address) public view returns (uint) {
-    return withdrawLimit[_ERC20Address];
+        return withdrawLimit[_ERC20Address];
     }
 
     // Function to return the delay of the account   
@@ -183,6 +183,7 @@ contract Accounts {
     
     //Fallback function
     fallback () external payable {
+        emit Deposit(address(this), msg.sender, msg.value);
     } 
 
     //Receive function

@@ -164,6 +164,7 @@ contract Accounts {
 
     //Fallback function
     fallback () external payable {
+        emit Deposit(address(this), msg.sender, msg.value);        
     } 
 
     //Receive function
