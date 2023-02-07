@@ -1,0 +1,541 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "jointindex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "pauseAccount",
+						"type": "address"
+					}
+				],
+				"name": "AccountPause",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "jointindex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "unpauseAccount",
+						"type": "address"
+					}
+				],
+				"name": "AccountUnpause",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "jointindex",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "beneficiary",
+						"type": "address"
+					}
+				],
+				"name": "BeneficiarySet",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "joint",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "CreateAccount",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_beneficiary",
+						"type": "address"
+					}
+				],
+				"name": "beneficiary",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createJointWallet",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_ERC20Address",
+						"type": "address"
+					}
+				],
+				"name": "getAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isCelo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "_ERC20Address",
+						"type": "address"
+					}
+				],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getBeneficiary",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getDelay",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getInitiateAt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getJointWalletById",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_ttodindex",
+						"type": "uint256"
+					}
+				],
+				"name": "getTransferFee",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "jointArray",
+				"outputs": [
+					{
+						"internalType": "contract Accounts",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "jointPause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_ERC20Address",
+						"type": "address"
+					}
+				],
+				"name": "jointSetAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_beneficiary",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_delay",
+						"type": "uint256"
+					}
+				],
+				"name": "jointSetBeneficiary",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isWithdraw",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isCelo",
+						"type": "bool"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_ERC20Address",
+						"type": "address"
+					}
+				],
+				"name": "jointTransferOrWithdraw",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jointindex",
+						"type": "uint256"
+					}
+				],
+				"name": "jointUnpause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "owners",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contract/Joint.sol": "JointWalletFactory"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/security/Pausable.sol": {
+			"keccak256": "0x0849d93b16c9940beb286a7864ed02724b248b93e0d80ef6355af5ef15c64773",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ddabb16009cd17eaca3143feadf450ac13e72919ebe2ca50e00f61cb78bc004",
+				"dweb:/ipfs/QmSPwPxX7d6TTWakN5jy5wsaGkS1y9TW8fuhGSraMkLk2B"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x190dd6f8d592b7e4e930feb7f4313aeb8e1c4ad3154c27ce1cf6a512fc30d8cc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ce8dfb62d0c4fa260d6eec8f1cd47f5f2a044e11bde5b31d18072fa6e7d9010",
+				"dweb:/ipfs/QmTyFztU3tLEcEDnqqiaW4UJetqsU77LXc6pjc9oTXCK5u"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol": {
+			"keccak256": "0xf41ca991f30855bf80ffd11e9347856a517b977f0a6c2d52e6421a99b7840329",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b2717fd2bdac99daa960a6de500754ea1b932093c946388c381da48658234b95",
+				"dweb:/ipfs/QmP6QVMn6UeA3ByahyJbYQr5M6coHKBKsf3ySZSfbyA8R7"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x9b72f93be69ca894d8492c244259615c4a742afc8d63720dbc8bb81087d9b238",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f5a7b96e511be78d5cdf635c784e6ab8cdd38625bb8cafb8a80914a1c89cf0f6",
+				"dweb:/ipfs/QmVzTCwJxQAkjRQHboT5QrvsVJGWQHgfEjeTbvyxoKBrds"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0xf96f969e24029d43d0df89e59d365f277021dac62b48e1c1e3ebe0acdd7f1ca1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ec772b45a624be516f1c81970caa8a2e144301e9d0921cbc1a2789fef39a1269",
+				"dweb:/ipfs/QmNyjwxCrGhQMyzLD93oUobJXVe9ceJvRvfXwbEtuxPiEj"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/SafeMath.sol": {
+			"keccak256": "0x0f633a0223d9a1dcccfcf38a64c9de0874dfcbfac0c6941ccf074d63a2ce0e1e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://864a40efcffdf408044c332a5aa38ec5618ed7b4eecb8f65faf45671bd6cdc65",
+				"dweb:/ipfs/QmQJquTMtc6fgm5JQzGdsGpA2fqBe3MHWEdt2qzaLySMdN"
+			]
+		},
+		"contract/Joint.sol": {
+			"keccak256": "0x32d2c1a26c28373afeaaa856f7979c61e9ecc34b3c826262632655426d0e7fea",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b394906dad71d17b31d74bc2ffe6b797f7eceebb7ce5c14b9f27dac43f973b70",
+				"dweb:/ipfs/QmboM56ni1nGS479Rjbg6oqhiSeQLqhT276aaZVqiCgQxk"
+			]
+		},
+		"contract/JointAccount.sol": {
+			"keccak256": "0x12be9295359db589ea210ab24e0c05cb2112b29cbf874fffa1a378b016671f43",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4349d1a64063c163869972cebd79bfc97ce82473127eb4e1c2fd0d466057d7ce",
+				"dweb:/ipfs/QmTzgtt92dxq4jwAkaW1EEN7KSYVtyeyaSQEkDJFYBjJUr"
+			]
+		}
+	},
+	"version": 1
+}
