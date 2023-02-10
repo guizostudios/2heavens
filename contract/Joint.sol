@@ -28,33 +28,33 @@ contract JointWalletFactory {
 
    // Function to set the beneficiary and the time to withdraw all the money
     function jointSetBeneficiary(uint256 _jointindex, address payable _beneficiary, uint _delay) public {
-        jointArray[_jointindex].setBeneficiary(_beneficiary, _delay, msg.sender);
+        jointArray[_jointindex].setBeneficiary(_beneficiary, _delay);
         emit BeneficiarySet(_jointindex, _beneficiary);
     }
 
     // Function to set the amount that the beneficiary can withdraw
     function jointSetAmount(uint256 _jointindex, uint _amount, address _ERC20Address) public {
     require(jointArray[_jointindex].returnOwner() == msg.sender, "Only the owner can set the withdrawal limit.");
-    jointArray[_jointindex].setWithdrawLimit( _amount, _ERC20Address, msg.sender);
+    jointArray[_jointindex].setWithdrawLimit( _amount, _ERC20Address);
 }
 
 
     // Function to pause the account
     function jointPause(uint256 _jointindex) public {
-        jointArray[_jointindex].pause(msg.sender);
+        jointArray[_jointindex].pause();
         emit AccountPause(_jointindex, msg.sender);
    }
 
     // Function to unfreeze the account
     function jointUnpause(uint256 _jointindex) public {
-        jointArray[_jointindex].unpause(msg.sender);
+        jointArray[_jointindex].unpause();
         emit AccountUnpause(_jointindex, msg.sender);
     }
 
 
     // Function to transfer or withdraw Celo or ERC20
     function jointTransferOrWithdraw(uint256 _jointindex, bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address) public payable {
-        jointArray[_jointindex].transferOrWithdraw(_isWithdraw, _isCelo, _recipient, _amount, _ERC20Address, msg.sender);
+        jointArray[_jointindex].transferOrWithdraw(_isWithdraw, _isCelo, _recipient, _amount, _ERC20Address);
     }
 
     // View to return the JointWallet

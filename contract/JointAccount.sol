@@ -37,18 +37,20 @@ contract Accounts is Pausable, ReentrancyGuard {
     mapping (address => uint) public withdrawLimit;
 
     // Modifier only owner
-    modifier onlyOwner(address _sender) {
-        require(_sender == owner, "Only the owner can call this function");
+    modifier onlyOwner() {
+        require(owner == msg.sender, "Only the owner can call this function");
          _;
     }
 
     // Modifier owner or beneficiary
-    modifier requireBeneficiaryOrOwner(address _sender) {
-        require(_sender == beneficiary || msg.sender == owner, "Only the owner or the beneficiary can call this function");
+    modifier requireBeneficiaryOrOwner() {
+        require(beneficiary == msg.sender || msg.sender == owner, "Only the owner or the beneficiary can call this function");
          _;
     }
 
       constructor(address payable _owner) {
+
+        require(_owner != address(0), "Owner address cannot be zero address"); 
         owner = _owner;
         transferFee = 1;
         feeAddress =  payable(0xca3C4DF107a315de8545Fb715917CaE4f6af8BF1);
@@ -69,17 +71,17 @@ contract Accounts is Pausable, ReentrancyGuard {
     event Deposit(address indexed contractAddress, address indexed from, uint amount);
 
     //Pause
-    function pause(address _sender) public onlyOwner(_sender) {
+    function pause() public onlyOwner {
         _pause();
     }
 
     //Unpause
-    function unpause(address _sender) public onlyOwner(_sender) {
+    function unpause() public onlyOwner {
         _unpause();
     }  
 
     // Function to set the beneficiary and the time to withdraw all the money
-    function setBeneficiary(address payable _beneficiary, uint _delay, address _sender) public onlyOwner(_sender) {
+    function setBeneficiary(address payable _beneficiary, uint _delay) public onlyOwner {
         require(_beneficiary != address(0), "Beneficiary cannot be zero address");
         beneficiary = _beneficiary;
         delay = _delay;
@@ -88,13 +90,15 @@ contract Accounts is Pausable, ReentrancyGuard {
 
 
     // Function to set the amount that the beneficiary can withdraw
-    function setWithdrawLimit( uint _amount, address _ERC20Address, address _sender) public onlyOwner(_sender) {
+    function setWithdrawLimit( uint _amount, address _ERC20Address) public onlyOwner {
+    require(_ERC20Address != address(0), "ERC20 address cannot be zero address");
     require(_amount != 0, "Amount cannot be zero");
     withdrawLimit[_ERC20Address] = _amount;
     }
 
     // Function to transfer the funds
-    function transferOrWithdraw(bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address, address _sender) public whenNotPaused nonReentrant requireBeneficiaryOrOwner(_sender) {
+    function transferOrWithdraw(bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address) public whenNotPaused nonReentrant requireBeneficiaryOrOwner {
+        require(_amount != 0, "Amount cannot be zero");
         if (msg.sender == beneficiary) {
             require(_amount <= withdrawLimit[_ERC20Address] || (InitiatedAt + delay) < block.timestamp , "The withdrawal amount exceeds the limit or delay has not passed yet.");
         }
@@ -106,6 +110,7 @@ contract Accounts is Pausable, ReentrancyGuard {
             feeAddress.transfer(fee);
             withdrawLimit[_ERC20Address] -= _amount;
          } else {
+            require(_ERC20Address != address(0), "ERC20 address cannot be zero address");
             ERC20 = IERC20(_ERC20Address);
             require(_amount <= ERC20.balanceOf(address(this)), "Insufficient funds.");
             fee = _amount.mul(transferFee).div(100);

@@ -44,17 +44,18 @@ contract Accounts is Pausable, ReentrancyGuard {
     //balance of ERC20 token
     uint public tokenBalance;
 
-    modifier onlyOwner(address _sender) {
-        require(_sender == owner, "Only the owner can call this function");
+    modifier onlyOwner() {
+        require(owner == msg.sender, "Only the owner can call this function");
          _;
     }
 
-    modifier onlyHeir (address _sender) {
-        require(_sender == heir, "Only the heir can call this function");
+    modifier onlyHeir () {
+        require(heir == msg.sender, "Only the heir can call this function");
          _;
     }
 
       constructor(address payable _owner) {
+            require(_owner != address(0), "Owner address cannot be zero address");
            owner = _owner;
            deployer = _owner;
            transferFee = 1;
@@ -76,31 +77,31 @@ contract Accounts is Pausable, ReentrancyGuard {
 
 
     //Pause
-    function pause(address _sender) public onlyOwner(_sender) {
+    function pause() public onlyOwner {
         _pause();
     }
 
     //Unpause
-    function unpause(address _sender) public onlyOwner(_sender) {
+    function unpause() public onlyOwner {
         _unpause();
     }
 
     // Function to set the heir and claimDelay
-    function setHeir(address payable _heir, uint _claimDelay, address _sender) public onlyOwner(_sender) {
+    function setHeir(address payable _heir, uint _claimDelay) public onlyOwner {
         require(_heir != address(0), "Heir cannot be zero address");
          heir = _heir;
         claimDelay = _claimDelay;
     }
 
     // Function for the heir to start the claim process
-    function initiateClaim(address _sender) public whenNotPaused onlyHeir(_sender) {
+    function initiateClaim() public whenNotPaused onlyHeir {
         require(!claimInProgress, "Claim process is already in progress.");
         claimInProgress = true;
         claimInitiatedAt = block.timestamp;
     }
 
     // Function for the heir to claim the account
-    function claim(address _sender) public whenNotPaused onlyHeir(_sender) {
+    function claim() public whenNotPaused onlyHeir {
         require(claimInProgress, "Claim process has not been initiated.");
         require(block.timestamp >= claimInitiatedAt + claimDelay * 1 days, "Claim delay has not expired.");
         owner = heir;
@@ -109,14 +110,15 @@ contract Accounts is Pausable, ReentrancyGuard {
 
         
     // Function to stop Claim that the owner passed away
-    function stopClaim(address _sender) public onlyOwner(_sender) {
+    function stopClaim() public onlyOwner {
         require(claimInProgress, "There is no active claim to stop.");
         claimInProgress = false;
     }
 
 
      // Function to transfer or withdraw the funds
-    function transferOrWithdraw (bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address, address _sender) public whenNotPaused nonReentrant onlyOwner(_sender) {
+    function transferOrWithdraw (bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address) public whenNotPaused nonReentrant onlyOwner {
+        require(_amount != 0, "Amount cannot be zero");
         address payable recipient = _isWithdraw ? owner: _recipient;
        if (_isCelo) {
             require(_amount <= address(this).balance, "Insufficient funds.");
@@ -124,6 +126,7 @@ contract Accounts is Pausable, ReentrancyGuard {
             recipient.transfer(_amount.sub(fee));
             feeAddress.transfer(fee);
         } else {
+            require(_ERC20Address != address(0), "ERC20 address cannot be zero address");
             ERC20 = IERC20(_ERC20Address);
             require(_amount <= ERC20.balanceOf(address(this)), "Insufficient funds.");
             fee = _amount.mul(transferFee).div(100);

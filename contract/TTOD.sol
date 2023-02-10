@@ -34,43 +34,43 @@ contract TTODFactory {
 
     // Function to set the heir and claimDelay
     function ttodSetHeir(uint256 _ttodindex, address payable _heir, uint _claimDelay) public {
-        ttodArray[_ttodindex].setHeir(_heir, _claimDelay, msg.sender);
+        ttodArray[_ttodindex].setHeir(_heir, _claimDelay);
         emit HeirSet(_ttodindex, _heir);
         }
     // Function for the heir to start the claim process
     function ttodInitiateClaim(uint256 _ttodindex) public {
-        ttodArray[_ttodindex].initiateClaim(msg.sender);
+        ttodArray[_ttodindex].initiateClaim();
         emit ClaimInitiated(_ttodindex, msg.sender);
     }
 
     // Function for the heir to claim the account
     function ttodClaim(uint256 _ttodindex) public  {
-        ttodArray[_ttodindex].claim(msg.sender);
+        ttodArray[_ttodindex].claim();
         emit AccountClaimed(_ttodindex, msg.sender);
         }
 
     // Function to cancel the claim of account
     function ttodStopClaim(uint256 _ttodindex) public {
-        ttodArray[_ttodindex].stopClaim(msg.sender);
+        ttodArray[_ttodindex].stopClaim();
         emit AccountStopClaim(_ttodindex, msg.sender);
     }
 
     // Function to pause the account
     function ttodPause(uint256 _ttodindex) public {
-        ttodArray[_ttodindex].pause(msg.sender);
+        ttodArray[_ttodindex].pause();
         emit AccountPause(_ttodindex, msg.sender);
     }
 
     // Function to unpause the account
     function ttodUnpause(uint256 _ttodindex) public {
-        ttodArray[_ttodindex].unpause(msg.sender);
+        ttodArray[_ttodindex].unpause();
         emit AccountUnpause(_ttodindex, msg.sender);
     }
 
 
     // Function to transfer or withdraw Celo or ERC20
     function ttodTransferOrWithdraw(uint256 _ttodindex, bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address) public payable {
-        ttodArray[_ttodindex].transferOrWithdraw(_isWithdraw, _isCelo, _recipient, _amount, _ERC20Address, msg.sender);
+        ttodArray[_ttodindex].transferOrWithdraw(_isWithdraw, _isCelo, _recipient, _amount, _ERC20Address);
     }
 
     // View to return the TTOD Wallet
