@@ -27,16 +27,10 @@ contract JointWalletFactory {
     }
 
    // Function to set the beneficiary and the time to withdraw all the money
-    function jointSetBeneficiary(uint256 _jointindex, address payable _beneficiary, uint _delay) public {
-        jointArray[_jointindex].setBeneficiary(_beneficiary, _delay);
+    function jointSetBeneficiary(uint256 _jointindex, address payable _beneficiary, uint _delay, uint _amount, address _ERC20Address) public {
+        jointArray[_jointindex].setBeneficiary(_beneficiary, _delay, _amount, _ERC20Address);
         emit BeneficiarySet(_jointindex, _beneficiary);
     }
-
-    // Function to set the amount that the beneficiary can withdraw
-    function jointSetAmount(uint256 _jointindex, uint _amount, address _ERC20Address) public {
-    require(jointArray[_jointindex].returnOwner() == msg.sender, "Only the owner can set the withdrawal limit.");
-    jointArray[_jointindex].setWithdrawLimit( _amount, _ERC20Address);
-}
 
 
     // Function to pause the account

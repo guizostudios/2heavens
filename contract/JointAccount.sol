@@ -81,20 +81,16 @@ contract Accounts is Pausable, ReentrancyGuard {
     }  
 
     // Function to set the beneficiary and the time to withdraw all the money
-    function setBeneficiary(address payable _beneficiary, uint _delay) public onlyOwner {
+    function setBeneficiary(address payable _beneficiary, uint _delay,  uint _amount, address _ERC20Address) public onlyOwner {
         require(_beneficiary != address(0), "Beneficiary cannot be zero address");
+        require(_ERC20Address != address(0), "ERC20 address cannot be zero address");
         beneficiary = _beneficiary;
         delay = _delay;
         InitiatedAt = block.timestamp;
+        withdrawLimit[_ERC20Address] = _amount;
     }
 
 
-    // Function to set the amount that the beneficiary can withdraw
-    function setWithdrawLimit( uint _amount, address _ERC20Address) public onlyOwner {
-    require(_ERC20Address != address(0), "ERC20 address cannot be zero address");
-    require(_amount != 0, "Amount cannot be zero");
-    withdrawLimit[_ERC20Address] = _amount;
-    }
 
     // Function to transfer the funds
     function transferOrWithdraw(bool _isWithdraw, bool _isCelo, address payable _recipient, uint _amount, address _ERC20Address) public whenNotPaused nonReentrant requireBeneficiaryOrOwner {
